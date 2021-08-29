@@ -1,6 +1,8 @@
 ---
 title: "2-2 dplyr"
-output: html_notebook
+output:
+  pdf_document: default
+  github_document: default
 ---
 
 참고문헌
