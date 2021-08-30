@@ -1,7 +1,7 @@
 ---
 title: "2-2 dplyr"
 output:
-  pdf_document: default
+  html_document: default
   github_document: default
 ---
 
@@ -12,4 +12,3 @@ output:
 1. dplyr 패키지
 
 - 데이터전처리
-
