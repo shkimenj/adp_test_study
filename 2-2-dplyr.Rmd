@@ -71,6 +71,24 @@ Cars93 %>% mutate(Pr_level = ifelse(Price < 12, "low", ifelse(Price >= 12 & Pric
 Q. Cars93 데이터에서 종류(Type)가 "Midsize" 혹은 "Small"인 데이터의 Model, Type, Weight, Price 변수들만 추출한 뒤, Type별로 Weight 변수값들이 Weight의 중앙값보다 작은(미만)인 경우는 "low", 중앙값 이상인 경우 "high" 값을 갖는 Weight_lv 변수를 생성하라. 그리고 Price 변수를 기준으로 데이터를 오름차순 정렬하라. 
 
 ```{r}
-Cars93 %>% filter(Type %in% c("Midsize", "small")) %>% # filter(변수 %in% 벡터): 변수 값이 벡터에 해당되는 경우만  
+Cars93 %>% filter(Type %in% c("Midsize", "small")) %>% # filter(변수 %in% 벡터): 변수 값이 벡터에 해당되는 경우만 
+  dplyr::select(Model, Type, Weight, Price) %>%        # 변수 선택 
+  group_by(Type) %>%                                   # 그룹별
+  mutate(Weight_lv = ifelse(Weight < median(Weight), "low", "high")) %>% # 변수 생성
+  arrange(Price)                                       # 정렬
+```
+
+7. {left, right, inner, full}_join
+
+카페에서 판매하는 메뉴 코드(code), 이름(name)을 담은 데이터 'NAME'과 메뉴 코드(code), 가격(price)를 담은 데이터 'PRICE'를 생성해보자. 그 후 각 메뉴의 고유코드를 의미하는 변수를 기준으로 {left, right, inner, full}_join을 수행하여 결과를 확인해보자. 
+
+```{r}
+# 데이터프레임 생성
+NAME <- data.frame(code = c("A01", "A02", "A03"),
+                   name = c("coffee", "cake", "cookie"))
+
+Price <- data.frame(code = c("A01", "A02", "A04"),
+                    price = c(3000, 4000, 3000))
+
 ```
 
